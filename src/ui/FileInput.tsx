@@ -28,10 +28,10 @@ const FileInput = () => {
 
     console.log(' filesState ',files, files.length)
 
-    const fileInputRef = useRef()
-    const clearFieldName = (e:any) => {
+    const fileInputRef = useRef<HTMLInputElement>()
+
+    const clearFieldName = (e:Event) => {
        setFiles([])
-        // @ts-ignore
         fileInputRef.current.value = '';
     }
 
@@ -48,7 +48,7 @@ const FileInput = () => {
                 ))}
             </div>
 
-            <button onClick={clearFieldName}> Очистка поля </button>
+            <button onClick={()=>clearFieldName(event)}> Очистка поля </button>
 
 
         </div>
