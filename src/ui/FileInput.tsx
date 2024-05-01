@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useContext, createContext} from 'react';
 
 
 
@@ -42,16 +42,18 @@ const FileInput = () => {
         setFiles(filteredFiles);
     }
 
+    const FileContext = React.createContext(null)
 
 
 
     return (
+
         <div>
             <input ref={fileInputRef} id={'input'} type='file' onChange={printFiles} multiple={true}  />
 
             <div>
                 {files.map((f) => (
-                    <div>
+                    <div key={f.name}>
                         {f.name}
                         <button onClick={()=>deleteFile(f.name)}>Удалить</button>
                     </div>

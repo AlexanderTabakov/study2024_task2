@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 interface IInput {
     id: string,
@@ -27,6 +27,7 @@ const InputAndValidate:React.FC<IInput> = (
 
 
 
+
     const onInputHandler  = (e:Event) => {
 
         const inputValue = (e.target as HTMLInputElement).value;
@@ -50,7 +51,6 @@ const InputAndValidate:React.FC<IInput> = (
         onInputHandler(event);
         onErrorTest()
     }
-
 
 
     return (
