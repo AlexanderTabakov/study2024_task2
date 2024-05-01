@@ -54,7 +54,6 @@ const FileInput = () => {
                     <div>
                         {f.name}
                         <button onClick={()=>deleteFile(f.name)}>Удалить</button>
-
                     </div>
 
                 ))}
