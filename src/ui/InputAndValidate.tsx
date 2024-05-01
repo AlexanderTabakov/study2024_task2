@@ -27,9 +27,9 @@ const InputAndValidate:React.FC<IInput> = (
 
 
 
-    const onInputHandler  = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const onInputHandler  = (e:Event) => {
 
-        const inputValue = e.target.value
+        const inputValue = (e.target as HTMLInputElement).value;
         setValue(inputValue);
         console.log("inputValue",value);
     }
@@ -42,12 +42,14 @@ const InputAndValidate:React.FC<IInput> = (
         } else{
             setErrorMessage('Incorrect pattern');
         }
+        return false
     }
 
 
-
-
-
+    const testInput = () => {
+        onInputHandler(event);
+        onErrorTest()
+    }
 
 
 
@@ -55,8 +57,7 @@ const InputAndValidate:React.FC<IInput> = (
 
         <>
             <label htmlFor={id}> {label}</label>
-            <input type={type} id={id} placeholder={placeholder} maxLength={maxlength} required={required} onChange={onInputHandler}/>
-            <button onClick={onErrorTest}>test</button>
+            <input type={type} id={id} placeholder={placeholder} maxLength={maxlength} required={required} onChange={testInput}/>
             {errorMessage && <span style={{color:'red'}}>{errorMessage}</span>}
 
         </>
