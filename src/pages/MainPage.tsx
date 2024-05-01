@@ -1,9 +1,11 @@
+import FileInput from "ui/FileInput";
+
 const MainPage = () => {
 
     return(
-        <div>
-            TEST
-        </div>
+        <>
+            <FileInput/>
+        </>
     )
 
 }
