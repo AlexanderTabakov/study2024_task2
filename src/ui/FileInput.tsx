@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 
+
 const FileInput = () => {
 
    const [files, setFiles] = useState([])
@@ -35,6 +36,12 @@ const FileInput = () => {
         fileInputRef.current.value = '';
     }
 
+    const deleteFile = (name:string) => {
+
+       const filteredFiles = files.filter((file:any) => file.name!==name)
+        setFiles(filteredFiles);
+    }
+
 
 
 
@@ -44,9 +51,16 @@ const FileInput = () => {
 
             <div>
                 {files.map((f) => (
-                    <div>{f.name}</div>
+                    <div>
+                        {f.name}
+                        <button onClick={()=>deleteFile(f.name)}>Удалить</button>
+
+                    </div>
+
                 ))}
             </div>
+
+
 
             <button onClick={()=>clearFieldName(event)}> Очистка поля </button>
 
