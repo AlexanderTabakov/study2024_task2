@@ -126,7 +126,7 @@ const InputAndValidate:React.FC<IInput> = (
             <label style={{opacity:0, position:'absolute'}} htmlFor={id}> {label}</label>
 
                 <span className={'placeHolderSpan'}>{placeholder}</span>
-                <input className={errorMessage? 'inputError' : 'input' } type={type} id={id}  maxLength={maxlength} minLength={minlength}
+                <input className={errorMessage? 'inputError' : 'input' } type={type} id={id} placeholder={placeholder} maxLength={maxlength} minLength={minlength}
                        required={required} onChange={testInput}/>
 
             {errorMessage && <span className={'errorText'} >{errorMessage}</span>}
