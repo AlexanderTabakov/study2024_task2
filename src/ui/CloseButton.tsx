@@ -9,15 +9,14 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 
-const ButtonPrimary = styled.button`
+const CloseButtonPrimary = styled.button`
 
     bottom: 40px;
     width: clamp(30px, 5vw, 96px);
-    height: 42px;
+    border-radius: 50%;    
     background-color: #6E41E2;
     color: white;
     border: none;
-    border-radius: 3px;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -42,51 +41,12 @@ const ButtonPrimary = styled.button`
 
 
 
-const ButtonSecondary = styled.button`
-
-    bottom: 40px;
-    width: clamp(30px, 5vw, 96px);
-    height: 42px;
-    background-color: white;
-    color: #6E41E2;
-    border: #6E41E2 solid 2px;
-    border-radius: 3px;
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: clamp(5px, 1vw, 15px);
-    line-height: 17px;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #6E41E20A
-    }
-
-    &:active {
-        background-color: #e7e4ec;
-        opacity: 14%;
-    }
-
-    &:focus {
-        background-color: rgba(183, 172, 172, 0.48);
-    }
-
-    &:disabled {
-        background-color: #764ae8;
-    }
-
-`
-
-const Button:React.FC<IButtonProps> = ({name, type, isDisabled, onClick, children}) => {
+const CloseButton:React.FC<IButtonProps> = ({name, type, isDisabled, onClick, }) => {
     return (
 
-        <>
-            {type=='submit'
-                ? <ButtonPrimary onClick={onClick} type={type} name={name} disabled={isDisabled} > {children} {name} </ButtonPrimary>
-                : <ButtonSecondary onClick={onClick} type={type} name={name} disabled={isDisabled} > {children} {name} </ButtonSecondary> }
-
-        </>
-
+                 <CloseButtonPrimary onClick={onClick} type={type} name={name} disabled={isDisabled} > + </CloseButtonPrimary>
 
     );
 };
+
+export default CloseButton;

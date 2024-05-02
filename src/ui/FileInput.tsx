@@ -4,6 +4,7 @@ import Button from "ui/Button";
 import button from "ui/Button";
 import FileTab from "ui/FileTab";
 import Popup from "ui/PopUp";
+import CloseButton from "ui/Button";
 
 
 const Container = styled.form`
@@ -112,9 +113,14 @@ const FileInput = () => {
             <input style={{opacity:0, position:'absolute', width:'100%', height:'100%'}} draggable={true} ref={fileInputRef} id={'input'} type='file' onChange={printFiles} multiple={true}/>
             </div>
 
+
+            <CloseButton/>
+            <Button></Button>
+
             <Popup openTitle={'RESET'}>
                 <h2> Do you want reset? </h2>
                 <Button style={{zIndex:'2'}}  type='button' onClick={()=>clearFieldName(event)}> RESET </Button> </Popup>
+
             <div className={'fileList'}>
                 {files.map((f)=><FileTab key={f.name} name={f.name} onClick={()=>deleteFile(f.name)}/>)}
             </div>
