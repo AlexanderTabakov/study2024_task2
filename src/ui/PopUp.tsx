@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import {Form} from "antd";
 import Button from "ui/Button";
+import CloseButton from "ui/CloseButton";
 
 interface IPopUp {
     openTitle?: string,
@@ -24,6 +25,7 @@ const Container = styled.aside`
         justify-content: center;
         transform: scale(1);
         transition: 0.5s;
+        
     }
 
     .popup_content {
@@ -39,20 +41,12 @@ const Container = styled.aside`
         align-items: center;
         justify-content: space-around;
         font-family: 'Roboto', sans-serif;
+        .closeIcon {
 
+            position: absolute;    }
     }
 
-    .close-icon {
-
-        border-radius: 50%;
-        border: none;
-        background: rgba(0, 0, 0, 0);
-        rotate: 45deg;
-        cursor: pointer;
-        font-size: 50px;
-        color: blue;
-
-    }
+    
 
     .popup_content > button:hover {
         cursor: pointer;
@@ -70,13 +64,11 @@ const Popup:React.FC<IPopUp> = ({ openTitle,  children }) => {
 
             <Container>
                 <Button type={'button'} onClick={togglePopup}>{openTitle}</Button>
-            {/*<div onClick={togglePopup}>{openTitle}</div>*/}
             {toggle && (
                 <div className={"popup"}>
                     <div className={"popup_content"}>
-                        <button className={"close-icon"} onClick={togglePopup}>
-                            +
-                        </button>
+
+                        <CloseButton className={'closeIcon'} onClick={togglePopup}></CloseButton>
                         {children}
 
                     </div>

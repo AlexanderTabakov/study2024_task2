@@ -10,9 +10,9 @@ const Container = styled.form`
     display: flex;
     position: relative;
     flex-direction: column;
-    height: clamp(45px, 30vw, 800px);
+    height: clamp(450px, 30vw, 800px);
     width: clamp(300px, 40vw, 675px);
-    //pointer-events: none;
+    
     
     .dragHover  {
         background-color: #6E41E2;
@@ -114,9 +114,6 @@ const FileInput = () => {
             <input style={{opacity:0, position:'absolute', width:'100%', height:'100%'}} draggable={true} ref={fileInputRef} id={'input'} type='file' onChange={printFiles} multiple={true}/>
             </div>
 
-
-            <CloseButton/>
-            <Button></Button>
 
             <Popup openTitle={'RESET'}>
                 <h2> Do you want reset? </h2>
