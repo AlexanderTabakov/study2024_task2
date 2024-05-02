@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState, useContext, createContext} from 'react';
 import styled from "styled-components";
 import Button from "ui/Button";
-import button from "ui/Button";
 import FileTab from "ui/FileTab";
 import Popup from "ui/PopUp";
 import CloseButton from "ui/Button";
@@ -26,8 +25,8 @@ const Container = styled.form`
         display: flex;
         justify-content: center;
         align-items: center;
-        width: clamp(300px, 40vw, 675px);
         border: #6E41E2 solid 2px;
+        width: clamp(300px, 40vw, 675px);
         height: clamp(45px, 30vw, 90px);      
         
         
@@ -85,10 +84,10 @@ const FileInput = () => {
     }
 
     useEffect(() => {
-        const dragNdropSyle = () => {
+        const dragNdropStyle = () => {
             const target = document.getElementById("testId");
             target.addEventListener("dragenter", (event) => {
-                if ((event.target as HTMLTextAreaElement) .classList.contains("labelForFileInput")) {
+                if ((event.target as HTMLTextAreaElement).classList.contains("labelForFileInput")) {
                     (event.target as HTMLTextAreaElement).classList.add("dragHover");
                 }
             });
@@ -98,16 +97,18 @@ const FileInput = () => {
                     (event.target as HTMLTextAreaElement).classList.remove("dragHover");
                 }
             });
+
+            console.log('event', event.target);
         }
-        dragNdropSyle();
-        return dragNdropSyle
+        dragNdropStyle();
+        return dragNdropStyle
 
 
     }, []);
 
     return (
 
-        <Container id={'testId'}>
+        <Container >
             <div id={'testId'} className={'labelForFileInput'}>
             <label  htmlFor="input"> Нажмите или перетащите файлы </label>
             <input style={{opacity:0, position:'absolute', width:'100%', height:'100%'}} draggable={true} ref={fileInputRef} id={'input'} type='file' onChange={printFiles} multiple={true}/>
