@@ -86,7 +86,7 @@ const Form: React.FC<IForm> = ({
                       required={f.required}
                       maxlength={f.maxlength}
                       placeholder={f.placeholder}
-                      pattern={f.formDescription}
+                      pattern={f.pattern}
                       minlength={f.minlength}
                   />
               ))}
