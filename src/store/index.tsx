@@ -1,27 +1,26 @@
-import { create } from "zustand";
+import { create} from "zustand";
 import { devtools } from "zustand/middleware";
 
 export interface IState {
-    jsonFiles: [];
+    jsonFiles?: any;
+    addJsonFiles?:any,
 
 }
 
-const initialState: IState = {
-    jsonFiles: [],
 
-};
 
 const useStore = create(
-    devtools<IState>((set) => ({
+    devtools<IState>((set, get) => ({
         jsonFiles: [],
 
-        getJsonFiles: () => {
-
-        }
-
-
+        addJsonFiles (newFiles:any) {
+            const  setJsonFiles = [...get().jsonFiles, newFiles ]
+            set(({jsonFiles:setJsonFiles}))
+        },
     })),
 );
+
+useStore.getState().addJsonFiles
 
 
 

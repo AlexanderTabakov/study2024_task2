@@ -3,7 +3,10 @@ import styled from "styled-components";
 import Button from "ui/Button";
 import FileTab from "ui/FileTab";
 import Popup from "ui/PopUp";
-import CloseButton from "ui/Button";
+import useStore from "store";
+import {get} from "react-hook-form";
+
+
 
 
 const Container = styled.form`
@@ -20,6 +23,7 @@ const Container = styled.form`
         background-repeat: no-repeat;
         background-position: center;
     }
+    
     .labelForFileInput {
         position: relative;
         display: flex;
@@ -46,7 +50,15 @@ const Container = styled.form`
 
 const FileInput = () => {
 
+    // const{getState} = useStore
+    // getState().jsonFiles
+
+    const {getState} = useStore
+
+
    const [files, setFiles] = useState([])
+
+    // getState().addJsonFiles(files)
 
     function printFiles(e:any) {
         const files = e.target.files;
@@ -57,15 +69,15 @@ const FileInput = () => {
 
             reader.onload = () => {
 
-
                 setFiles([...files, reader.result])
-
+                getState().addJsonFiles (reader.result)
 
             };
 
             reader.readAsText(file);
 
         }
+
     }
 
     console.log(' filesState ',files, files.length)
@@ -81,20 +93,23 @@ const FileInput = () => {
 
        const filteredFiles = files.filter((file:any) => file.name!==name)
         setFiles(filteredFiles);
+        // getState().addJsonFiles (filteredFiles)
+
     }
 
     useEffect(() => {
         const dragNdropStyle = () => {
             const target = document.getElementById("testId");
-            target.addEventListener("dragenter", (event) => {
-                if ((event.target as HTMLTextAreaElement).classList.contains("labelForFileInput")) {
-                    (event.target as HTMLTextAreaElement).classList.add("dragHover");
+            const input = document.getElementById("input");
+            input.addEventListener("dragenter", (event) => {
+                if ((event.target as HTMLInputElement).classList.contains("fileInput")) {
+                    (target as HTMLDivElement).classList.add("dragHover");
                 }
             });
 
             target.addEventListener("dragleave", (event) => {
-                if ((event.target as HTMLTextAreaElement).classList.contains("labelForFileInput")) {
-                    (event.target as HTMLTextAreaElement).classList.remove("dragHover");
+                if ((event.target as HTMLInputElement).classList.contains("fileInput")) {
+                    (target as HTMLDivElement).classList.remove("dragHover");
                 }
             });
 
@@ -106,12 +121,18 @@ const FileInput = () => {
 
     }, []);
 
+    // getState().addJsonFiles (files)
+
+
+
+
+
     return (
 
         <Container >
             <div id={'testId'} className={'labelForFileInput'}>
             <label  htmlFor="input"> Нажмите или перетащите файлы </label>
-            <input style={{opacity:0, position:'absolute', width:'100%', height:'100%'}} draggable={true} ref={fileInputRef} id={'input'} type='file' onChange={printFiles} multiple={true}/>
+            <input className={'fileInput'} style={{opacity:0, position:'absolute', width:'100%', height:'100%'}} draggable={true} ref={fileInputRef} id={'input'} type='file' onChange={printFiles} multiple={true}/>
             </div>
 
 

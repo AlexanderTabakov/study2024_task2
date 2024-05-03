@@ -1,6 +1,8 @@
 
 
-const ColorSelect = () => {
+
+
+const SelectCustom = () => {
     return (
         <select name="" id="">
             <option value=""></option>
@@ -8,4 +10,4 @@ const ColorSelect = () => {
     )
 };
 
-export default ColorSelect;
+export default SelectCustom;
