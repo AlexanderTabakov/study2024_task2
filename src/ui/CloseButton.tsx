@@ -41,22 +41,22 @@ const CloseButtonPrimary = styled.button`
 `;
 
 const CloseButton: React.FC<IButtonProps> = ({
-    name,
-    type,
-    isDisabled,
-    onClick,
+  name,
+  type,
+  isDisabled,
+  onClick,
 }) => {
-    return (
-        <CloseButtonPrimary
-            onClick={onClick}
-            type={type}
-            name={name}
-            disabled={isDisabled}
-        >
-            {" "}
-            +{" "}
-        </CloseButtonPrimary>
-    );
+  return (
+    <CloseButtonPrimary
+      onClick={onClick}
+      type={type}
+      name={name}
+      disabled={isDisabled}
+    >
+      {" "}
+      +{" "}
+    </CloseButtonPrimary>
+  );
 };
 
 export default CloseButton;

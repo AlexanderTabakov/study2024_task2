@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CloseButton from "ui/CloseButton";
 import useStore from "store";
@@ -23,13 +23,28 @@ const Container = styled.div`
   align-content: center;
   gap: 10px;
   width: clamp(150px, 40vw, 652px);
+  height: clamp(150px, 20vw, 652px);
   padding: 10px;
-  border: #6e41e2 2px solid;
+  box-shadow: 0px 4px 16px 0px #33333314;
+
   font-family: "Roboto", sans-serif;
+  h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 40px;
+  }
+
+  h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+  }
+
   .formBtns {
     display: flex;
     align-items: center;
     gap: 7px;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
   }
 
   .formFields {
@@ -48,67 +63,67 @@ const Container = styled.div`
 `;
 
 const Form: React.FC<IForm> = ({ files, onChange }) => {
-    const { jsonFiles } = useStore.getState();
+  const { jsonFiles } = useStore.getState();
 
-    console.log("testfiles", jsonFiles);
+  console.log("testfiles", jsonFiles);
 
-    const [closed, setClosed] = React.useState(true);
-    const toggleForm = () => setClosed((prevToggle) => !prevToggle);
+  const [closed, setClosed] = React.useState(true);
+  const toggleForm = () => setClosed((prevToggle) => !prevToggle);
 
-    const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState({});
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value }: HTMLInputElement = e.target;
-        setFormValues({
-            ...formValues,
-            [name]: value,
-        });
-    };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value }: HTMLInputElement = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
-    const handleSubmit = (e: Event) => {
-        e.preventDefault();
-        console.log(formValues);
-    };
+  const handleSubmit = (e: Event) => {
+    e.preventDefault();
+    console.log(formValues);
+  };
 
-    return (
-        <>
-            {closed && (
-                <Container>
-                    <div className={"closeBtn"}>
-                        {" "}
-                        <CloseButton onClick={toggleForm} />
-                    </div>
+  return (
+    <>
+      {closed && (
+        <Container>
+          <div className={"closeBtn"}>
+            {" "}
+            <CloseButton onClick={toggleForm} />
+          </div>
 
-                    <h2>{files.form_name}</h2>
+          <h2>{files.form_name}</h2>
 
-                    <h3>{files.form_Description}</h3>
+          <h3>{files.form_Description}</h3>
 
-                    <div className={"formFields"}>
-                        {files.form_fields.map((f: any, index: any) => (
-                            <InputAndValidate
-                                key={f.index}
-                                id={f.id}
-                                type={f.type}
-                                label={f.label}
-                                required={f.required}
-                                maxlength={f.maxlength}
-                                placeholder={f.placeholder}
-                                pattern={f.pattern}
-                                minlength={f.minlength}
-                                // onChange={handleChange}
-                            />
-                        ))}
-                    </div>
+          <div className={"formFields"}>
+            {files.form_fields.map((f: any, index: any) => (
+              <InputAndValidate
+                key={f.index}
+                id={f.id}
+                type={f.type}
+                label={f.label}
+                required={f.required}
+                maxlength={f.maxlength}
+                placeholder={f.placeholder}
+                pattern={f.pattern}
+                minlength={f.minlength}
+                // onChange={handleChange}
+              />
+            ))}
+          </div>
 
-                    <div className={"formBtns"}>
-                        {files.form_buttons.map((f: any) => (
-                            <Button name={f.name} type={f.type} />
-                        ))}
-                    </div>
-                </Container>
-            )}
-        </>
-    );
+          <div className={"formBtns"}>
+            {files.form_buttons.map((f: any) => (
+              <Button name={f.name} type={f.type} />
+            ))}
+          </div>
+        </Container>
+      )}
+    </>
+  );
 };
 
 export default Form;

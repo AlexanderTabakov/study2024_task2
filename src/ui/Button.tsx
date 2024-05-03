@@ -75,37 +75,37 @@ const ButtonSecondary = styled.button`
 `;
 
 const Button: React.FC<IButtonProps> = ({
-    name,
-    type,
-    isDisabled,
-    onClick,
-    children,
+  name,
+  type,
+  isDisabled,
+  onClick,
+  children,
 }) => {
-    return (
-        <>
-            {type == "submit" ? (
-                <ButtonPrimary
-                    onClick={onClick}
-                    type={type}
-                    name={name}
-                    disabled={isDisabled}
-                >
-                    {" "}
-                    {children} {name}{" "}
-                </ButtonPrimary>
-            ) : (
-                <ButtonSecondary
-                    onClick={onClick}
-                    type={type}
-                    name={name}
-                    disabled={isDisabled}
-                >
-                    {" "}
-                    {children} {name}{" "}
-                </ButtonSecondary>
-            )}
-        </>
-    );
+  return (
+    <>
+      {type == "submit" ? (
+        <ButtonPrimary
+          onClick={onClick}
+          type={type}
+          name={name}
+          disabled={isDisabled}
+        >
+          {" "}
+          {children} {name}{" "}
+        </ButtonPrimary>
+      ) : (
+        <ButtonSecondary
+          onClick={onClick}
+          type={type}
+          name={name}
+          disabled={isDisabled}
+        >
+          {" "}
+          {children} {name}{" "}
+        </ButtonSecondary>
+      )}
+    </>
+  );
 };
 
 export default Button;

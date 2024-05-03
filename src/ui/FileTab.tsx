@@ -44,14 +44,14 @@ const Container = styled.li`
 `;
 
 const FileTab: React.FC<IFileTab> = ({ name, onClick }) => {
-    return (
-        <Container>
-            <p>{name}</p>
-            <button onClick={onClick} className={"removeBtn"}>
-                Удалить
-            </button>
-        </Container>
-    );
+  return (
+    <Container>
+      <p>{name}</p>
+      <button onClick={onClick} className={"removeBtn"}>
+        Удалить
+      </button>
+    </Container>
+  );
 };
 
 export default FileTab;

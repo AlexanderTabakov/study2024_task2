@@ -50,27 +50,27 @@ const Container = styled.aside`
 `;
 
 const Popup: React.FC<IPopUp> = ({ openTitle, children }) => {
-    const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
-    const togglePopup = () => setToggle((prevToggle) => !prevToggle);
-    return (
-        <Container>
-            <Button type={"button"} onClick={togglePopup}>
-                {openTitle}
-            </Button>
-            {toggle && (
-                <div className={"popup"}>
-                    <div className={"popup_content"}>
-                        <CloseButton
-                            className={"closeIcon"}
-                            onClick={togglePopup}
-                        ></CloseButton>
-                        {children}
-                    </div>
-                </div>
-            )}
-        </Container>
-    );
+  const togglePopup = () => setToggle((prevToggle) => !prevToggle);
+  return (
+    <Container>
+      <Button type={"button"} onClick={togglePopup}>
+        {openTitle}
+      </Button>
+      {toggle && (
+        <div className={"popup"}>
+          <div className={"popup_content"}>
+            <CloseButton
+              className={"closeIcon"}
+              onClick={togglePopup}
+            ></CloseButton>
+            {children}
+          </div>
+        </div>
+      )}
+    </Container>
+  );
 };
 
 export default Popup;
