@@ -10,7 +10,8 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const ButtonPrimary = styled.button`
   bottom: 40px;
-  width: clamp(30px, 5vw, 96px);
+  //width: clamp(30px, 5vw, 96px);
+  width: fit-content;
   height: 42px;
   background-color: #6e41e2;
   color: white;
@@ -39,7 +40,8 @@ const ButtonPrimary = styled.button`
 
 const ButtonSecondary = styled.button`
   bottom: 40px;
-  width: clamp(30px, 5vw, 96px);
+  //width: clamp(30px, 5vw, 96px);
+  width: fit-content;
   height: 42px;
   background-color: white;
   color: #6e41e2;

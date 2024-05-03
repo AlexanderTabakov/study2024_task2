@@ -11,67 +11,96 @@ interface IForm {
   formDescription?: string;
   form_fields?: any;
   form_buttons?: any;
+  files?: any;
 }
 
 const Container = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   align-content: center;
+  gap: 10px;
+  width: clamp(150px, 40vw, 900px);
+  padding: 10px;
+  border: blue 2px solid;
+  .formBtns{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  
+  .formFields{
+    display: flex;
+    flex-direction: column;
+    column-gap: 10px;
+  }
+  
+  .closeBtn{
+    position: absolute;
+    z-index: 0;
+    top: 5px;
+    right: 5px;
+  }
+  
 `;
 
 const Form: React.FC<IForm> = ({
-  children,
-  formName,
-  formDescription,
-  form_fields,
-  form_buttons,
-}) => {
-  //  const {getState} = useStore
-  // const testFiles = getState().jsonFiles
+  // children,
+  // formName,
+  // formDescription,
+  // form_fields,
+  // form_buttons,
 
-  const { jsonFiles } = useStore();
+  files,
+}) => {
+  const { jsonFiles } = useStore.getState();
 
   console.log("testfiles", jsonFiles);
 
+  const [closed, setClosed] = React.useState(true);
+  const toggleForm = () => setClosed((prevToggle) => !prevToggle);
+
+
+
   return (
-    jsonFiles.length > 2 && (
-      <Container>
-        <CloseButton />
+    <>
 
-        {/*{testFiles.map((f:any, index:any) =>*/}
-        {/*    <InputAndValidate key={index} id={f.id} type={f.type} label={f.label} required={f.required} maxlength={f.maxLength}/>*/}
-        {/*)}*/}
+      {closed && (
+          <Container>
+            <div className={'closeBtn'}> <CloseButton onClick={toggleForm}  /></div>
 
-        <h2>{formName}</h2>
 
-        <h3>{formDescription}</h3>
+            <h2>{files.form_name}</h2>
 
-        <div className={"formFields"}>
-          {form_fields.map((f: any) => (
-            <InputAndValidate
-              key={f.name}
-              id={f.id}
-              type={f.type}
-              label={f.label}
-              required={f.required}
-              maxlength={f.maxlength}
-              placeholder={f.placeholder}
-              pattern={f.formDescription}
-              minlength={f.minlength}
-            />
-          ))}
-        </div>
+            <h3>{files.form_Description}</h3>
 
-        <div className={"formBtns"}>
-          {form_buttons.map((f: any) => (
-            <Button key={f.name} type={f.type} />
-          ))}
-        </div>
 
-        {children}
-      </Container>
-    )
+            <div className={"formFields"}>
+              {files.form_fields.map((f: any, index:any) => (
+                  <InputAndValidate
+                      key={f.index}
+                      id={f.id}
+                      type={f.type}
+                      label={f.label}
+                      required={f.required}
+                      maxlength={f.maxlength}
+                      placeholder={f.placeholder}
+                      pattern={f.formDescription}
+                      minlength={f.minlength}
+                  />
+              ))}
+            </div>
+
+            <div className={"formBtns"}>
+              {files.form_buttons.map((f: any) => (
+                  <Button name={f.name} type={f.type} />
+              ))}
+            </div>
+          </Container>
+      )}
+
+    </>
   );
 };
 

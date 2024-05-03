@@ -6,17 +6,25 @@ export interface IState {
   addJsonFiles?: any;
 }
 
+const initialState: IState = {
+    jsonFiles: null,
+}
+
 const useStore = create(
   devtools<IState>((set, get) => ({
+      ...initialState,
     jsonFiles: [],
 
-    addJsonFiles(newFiles: any) {
+    addJsonFiles(newFiles: []) {
       const setJsonFiles = [...get().jsonFiles, newFiles];
       set({ jsonFiles: setJsonFiles });
     },
+      reset: () => {
+          set((state:IState) => ({ jsonFiles: (state.jsonFiles) }));
+      },
   })),
 );
 
-useStore.getState().addJsonFiles;
+// useStore.getState().addJsonFiles;
 
 export default useStore;

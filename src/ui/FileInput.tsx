@@ -1,22 +1,15 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useContext,
-  createContext,
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Button from "ui/Button";
 import FileTab from "ui/FileTab";
 import Popup from "ui/PopUp";
 import useStore from "store";
-import { get } from "react-hook-form";
 
 const Container = styled.form`
   display: flex;
   position: relative;
   flex-direction: column;
-  height: clamp(450px, 30vw, 800px);
+  //height: clamp(450px, 30vw, 800px);
   width: clamp(300px, 40vw, 675px);
 
   .dragHover {
@@ -47,14 +40,9 @@ const Container = styled.form`
 `;
 
 const FileInput = () => {
-  // const{getState} = useStore
-  // getState().jsonFiles
-
   const { getState } = useStore;
 
   const [files, setFiles] = useState([]);
-
-  // getState().addJsonFiles(files)
 
   function printFiles(e: any) {
     const files = e.target.files;
@@ -83,7 +71,6 @@ const FileInput = () => {
   const deleteFile = (name: string) => {
     const filteredFiles = files.filter((file: any) => file.name !== name);
     setFiles(filteredFiles);
-    // getState().addJsonFiles (filteredFiles)
   };
 
   useEffect(() => {
@@ -111,8 +98,6 @@ const FileInput = () => {
     dragNdropStyle();
     return dragNdropStyle;
   }, []);
-
-  // getState().addJsonFiles (files)
 
   return (
     <Container>
