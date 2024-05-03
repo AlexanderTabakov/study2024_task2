@@ -60,6 +60,7 @@ const Container = styled.div`
       position: absolute;
       opacity: 1;
         font-size: 10px;
+        bottom: 2px;
     }
   }
 
