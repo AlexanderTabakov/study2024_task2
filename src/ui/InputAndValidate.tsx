@@ -17,6 +17,8 @@ interface IInput {
 const Container = styled.div`
   position: relative;
 
+  font-family: "Roboto", sans-serif;
+
   .placeHolderSpan {
     position: absolute;
     opacity: 1;
@@ -26,7 +28,7 @@ const Container = styled.div`
     width: clamp(250px, 5vw, 482px);
     height: clamp(30px, 2vw, 56px);
     //styleName: 16 Paragraph 2;
-    font-family: Roboto, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
@@ -57,6 +59,7 @@ const Container = styled.div`
     .placeHolderSpan {
       position: absolute;
       opacity: 1;
+        font-size: 10px;
     }
   }
 
@@ -69,62 +72,69 @@ const Container = styled.div`
 `;
 
 const InputAndValidate: React.FC<IInput> = ({
-  id,
-  type,
-  label,
-  required,
-  placeholder,
-  maxlength,
-  minlength,
-  pattern,
+    id,
+    type,
+    label,
+    required,
+    placeholder,
+    maxlength,
+    minlength,
+    pattern,
 }) => {
-  const [value, setValue] = React.useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+    const [value, setValue] = React.useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-  const onInputHandler = (e: Event) => {
-    const inputValue = (e.target as HTMLInputElement).value;
-    setValue(inputValue);
-    console.log("inputValue", value);
-  };
+    const onInputHandler = (e: Event) => {
+        const inputValue = (e.target as HTMLInputElement).value;
+        setValue(inputValue);
+        console.log("inputValue", value);
+    };
 
-  const onErrorTest = () => {
-    if (value.match(pattern)) {
-      setErrorMessage("");
-    } else {
-      setErrorMessage("Incorrect pattern");
-    }
-    return false;
-  };
+    const onErrorTest = () => {
+        if (value.match(pattern)) {
+            setErrorMessage("");
+        } else {
+            setErrorMessage("Incorrect pattern");
+        }
+        return false;
+    };
 
-  const testInput = () => {
-    onInputHandler(event);
-    onErrorTest();
-  };
+    const [inputValue, setInputValue] = React.useState("");
 
-  return (
-    <>
-      <Container>
-        <label style={{ opacity: 0, position: "absolute" }} htmlFor={id}>
-          {" "}
-          {label}
-        </label>
+    const changeInputValue = (e: Event) => {
+        setInputValue((event.target as HTMLInputElement).value);
+    };
 
-        <span className={"placeHolderSpan"}>{placeholder}</span>
-        <input
-          className={errorMessage ? "inputError" : "input"}
-          type={type}
-          id={id}
-          // placeholder={placeholder}
-          maxLength={maxlength}
-          minLength={minlength}
-          required={required}
-          onChange={testInput}
-        />
+    const testInput = () => {
+        onInputHandler(event);
+        onErrorTest();
+        changeInputValue(event);
+    };
 
-        {errorMessage && <span className={"errorText"}>{errorMessage}</span>}
-      </Container>
-    </>
-  );
+    return (
+        <>
+            <Container>
+                <label style={{ opacity: 0, position: "absolute" }} htmlFor={id}>
+                    {" "}
+                    {label}
+                </label>
+
+                <span className={"placeHolderSpan"}>{placeholder}</span>
+                <input
+                    className={errorMessage ? "inputError" : "input"}
+                    type={type}
+                    id={id}
+                    // placeholder={placeholder}
+                    maxLength={maxlength}
+                    minLength={minlength}
+                    required={required}
+                    onChange={testInput}
+                />
+
+                {errorMessage && <span className={"errorText"}>{errorMessage}</span>}
+            </Container>
+        </>
+    );
 };
 
 export default InputAndValidate;

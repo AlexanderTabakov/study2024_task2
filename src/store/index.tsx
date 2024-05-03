@@ -8,21 +8,21 @@ export interface IState {
 
 const initialState: IState = {
     jsonFiles: null,
-}
+};
 
 const useStore = create(
-  devtools<IState>((set, get) => ({
-      ...initialState,
-    jsonFiles: [],
+    devtools<IState>((set, get) => ({
+        ...initialState,
+        jsonFiles: [],
 
-    addJsonFiles(newFiles: []) {
-      const setJsonFiles = [...get().jsonFiles, newFiles];
-      set({ jsonFiles: setJsonFiles });
-    },
-      reset: () => {
-          set((state:IState) => ({ jsonFiles: (state.jsonFiles) }));
-      },
-  })),
+        addJsonFiles(newFiles: []) {
+            const setJsonFiles = [...get().jsonFiles, newFiles];
+            set({ jsonFiles: setJsonFiles });
+        },
+        reset: () => {
+            set((state: IState) => ({ jsonFiles: state.jsonFiles }));
+        },
+    })),
 );
 
 // useStore.getState().addJsonFiles;

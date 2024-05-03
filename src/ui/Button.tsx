@@ -12,17 +12,18 @@ const ButtonPrimary = styled.button`
   bottom: 40px;
   //width: clamp(30px, 5vw, 96px);
   width: fit-content;
+  min-width: 7vw;
   height: 42px;
   background-color: #6e41e2;
   color: white;
   border: none;
   border-radius: 3px;
-  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: clamp(5px, 1vw, 15px);
   line-height: 17px;
   cursor: pointer;
+  font-family: "Roboto", sans-serif;
 
   &:hover {
     background-color: #5835b0;
@@ -42,12 +43,13 @@ const ButtonSecondary = styled.button`
   bottom: 40px;
   //width: clamp(30px, 5vw, 96px);
   width: fit-content;
+  min-width: 7vw;
   height: 42px;
   background-color: white;
   color: #6e41e2;
   border: #6e41e2 solid 2px;
   border-radius: 3px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: clamp(5px, 1vw, 15px);
@@ -73,37 +75,37 @@ const ButtonSecondary = styled.button`
 `;
 
 const Button: React.FC<IButtonProps> = ({
-  name,
-  type,
-  isDisabled,
-  onClick,
-  children,
+    name,
+    type,
+    isDisabled,
+    onClick,
+    children,
 }) => {
-  return (
-    <>
-      {type == "submit" ? (
-        <ButtonPrimary
-          onClick={onClick}
-          type={type}
-          name={name}
-          disabled={isDisabled}
-        >
-          {" "}
-          {children} {name}{" "}
-        </ButtonPrimary>
-      ) : (
-        <ButtonSecondary
-          onClick={onClick}
-          type={type}
-          name={name}
-          disabled={isDisabled}
-        >
-          {" "}
-          {children} {name}{" "}
-        </ButtonSecondary>
-      )}
-    </>
-  );
+    return (
+        <>
+            {type == "submit" ? (
+                <ButtonPrimary
+                    onClick={onClick}
+                    type={type}
+                    name={name}
+                    disabled={isDisabled}
+                >
+                    {" "}
+                    {children} {name}{" "}
+                </ButtonPrimary>
+            ) : (
+                <ButtonSecondary
+                    onClick={onClick}
+                    type={type}
+                    name={name}
+                    disabled={isDisabled}
+                >
+                    {" "}
+                    {children} {name}{" "}
+                </ButtonSecondary>
+            )}
+        </>
+    );
 };
 
 export default Button;

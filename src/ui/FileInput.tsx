@@ -11,6 +11,8 @@ const Container = styled.form`
   flex-direction: column;
   //height: clamp(450px, 30vw, 800px);
   width: clamp(300px, 40vw, 675px);
+  padding: 10px;
+  font-family: "Roboto", sans-serif;
 
   .dragHover {
     background-color: #6e41e2;
@@ -40,109 +42,109 @@ const Container = styled.form`
 `;
 
 const FileInput = () => {
-  const { getState } = useStore;
+    const { getState } = useStore;
 
-  const [files, setFiles] = useState([]);
+    const [files, setFiles] = useState([]);
 
-  function printFiles(e: any) {
-    const files = e.target.files;
+    function printFiles(e: any) {
+        const files = e.target.files;
 
-    for (let file of files) {
-      const reader = new FileReader();
+        for (const file of files) {
+            const reader = new FileReader();
 
-      reader.onload = () => {
-        setFiles([...files, reader.result]);
-        getState().addJsonFiles(reader.result);
-      };
+            reader.onload = () => {
+                setFiles([...files, reader.result]);
+                getState().addJsonFiles(reader.result);
+            };
 
-      reader.readAsText(file);
+            reader.readAsText(file);
+        }
     }
-  }
 
-  console.log(" filesState ", files, files.length);
+    console.log(" filesState ", files, files.length);
 
-  const fileInputRef = useRef<HTMLInputElement>();
+    const fileInputRef = useRef<HTMLInputElement>();
 
-  const clearFieldName = (e: Event) => {
-    setFiles([]);
-    fileInputRef.current.value = "";
-  };
-
-  const deleteFile = (name: string) => {
-    const filteredFiles = files.filter((file: any) => file.name !== name);
-    setFiles(filteredFiles);
-  };
-
-  useEffect(() => {
-    const dragNdropStyle = () => {
-      const target = document.getElementById("testId");
-      const input = document.getElementById("input");
-      input.addEventListener("dragenter", (event) => {
-        if (
-          (event.target as HTMLInputElement).classList.contains("fileInput")
-        ) {
-          (target as HTMLDivElement).classList.add("dragHover");
-        }
-      });
-
-      target.addEventListener("dragleave", (event) => {
-        if (
-          (event.target as HTMLInputElement).classList.contains("fileInput")
-        ) {
-          (target as HTMLDivElement).classList.remove("dragHover");
-        }
-      });
-
-      console.log("event", event.target);
+    const clearFieldName = (e: Event) => {
+        setFiles([]);
+        fileInputRef.current.value = "";
     };
-    dragNdropStyle();
-    return dragNdropStyle;
-  }, []);
 
-  return (
-    <Container>
-      <div id={"testId"} className={"labelForFileInput"}>
-        <label htmlFor="input"> Нажмите или перетащите файлы </label>
-        <input
-          className={"fileInput"}
-          style={{
-            opacity: 0,
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-          }}
-          draggable={true}
-          ref={fileInputRef}
-          id={"input"}
-          type="file"
-          onChange={printFiles}
-          multiple={true}
-        />
-      </div>
+    const deleteFile = (name: string) => {
+        const filteredFiles = files.filter((file: any) => file.name !== name);
+        setFiles(filteredFiles);
+    };
 
-      <Popup openTitle={"RESET"}>
-        <h2> Do you want reset? </h2>
-        <Button
-          style={{ zIndex: "2" }}
-          type="button"
-          onClick={() => clearFieldName(event)}
-        >
-          {" "}
-          RESET{" "}
-        </Button>{" "}
-      </Popup>
+    useEffect(() => {
+        const dragNdropStyle = () => {
+            const target = document.getElementById("testId");
+            const input = document.getElementById("input");
+            input.addEventListener("dragenter", (event) => {
+                if (
+                    (event.target as HTMLInputElement).classList.contains("fileInput")
+                ) {
+                    (target as HTMLDivElement).classList.add("dragHover");
+                }
+            });
 
-      <div className={"fileList"}>
-        {files.map((f) => (
-          <FileTab
-            key={f.name}
-            name={f.name}
-            onClick={() => deleteFile(f.name)}
-          />
-        ))}
-      </div>
-    </Container>
-  );
+            target.addEventListener("dragleave", (event) => {
+                if (
+                    (event.target as HTMLInputElement).classList.contains("fileInput")
+                ) {
+                    (target as HTMLDivElement).classList.remove("dragHover");
+                }
+            });
+
+            console.log("event", event.target);
+        };
+        dragNdropStyle();
+        return dragNdropStyle;
+    }, []);
+
+    return (
+        <Container>
+            <div id={"testId"} className={"labelForFileInput"}>
+                <label htmlFor="input"> Нажмите или перетащите файлы </label>
+                <input
+                    className={"fileInput"}
+                    style={{
+                        opacity: 0,
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
+                    }}
+                    draggable={true}
+                    ref={fileInputRef}
+                    id={"input"}
+                    type="file"
+                    onChange={printFiles}
+                    multiple={true}
+                />
+            </div>
+
+            <Popup openTitle={"RESET"}>
+                <h2> Do you want reset? </h2>
+                <Button
+                    style={{ zIndex: "2" }}
+                    type="button"
+                    onClick={() => clearFieldName(event)}
+                >
+                    {" "}
+                    RESET{" "}
+                </Button>{" "}
+            </Popup>
+
+            <div className={"fileList"}>
+                {files.map((f) => (
+                    <FileTab
+                        key={f.name}
+                        name={f.name}
+                        onClick={() => deleteFile(f.name)}
+                    />
+                ))}
+            </div>
+        </Container>
+    );
 };
 
 export default FileInput;

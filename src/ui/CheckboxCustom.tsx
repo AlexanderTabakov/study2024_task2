@@ -77,30 +77,36 @@ const Container = styled.div`
 `;
 
 const CheckBoxCustom: React.FC<ICheckbox> = ({
-  value,
-  checked,
-  disabled,
-  id,
-  name,
-  children,
-  onChange,
+    value,
+    checked,
+    disabled,
+    id,
+    name,
+    children,
+    onChange,
 }) => {
-  return (
-    <Container>
-      <input
-        type="checkbox"
-        onChange={onChange}
-        disabled={disabled}
-        className={"custom-checkbox"}
-        id={id}
-        name={name}
-        value={value}
-      />
-      <label htmlFor={id}>
-        {name} {children}
-      </label>
-    </Container>
-  );
+    const [checkBoxValue, setCheckBoxValue] = React.useState("");
+
+    const changeInputValue = (e: Event) => {
+        setCheckBoxValue((event.target as HTMLInputElement).value);
+    };
+
+    return (
+        <Container>
+            <input
+                type="checkbox"
+                onChange={onChange}
+                disabled={disabled}
+                className={"custom-checkbox"}
+                id={id}
+                name={name}
+                value={value}
+            />
+            <label htmlFor={id}>
+                {name} {children}
+            </label>
+        </Container>
+    );
 };
 
 export default CheckBoxCustom;
